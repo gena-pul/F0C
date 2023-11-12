@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ASCII Converter</title>
+    <style>
+        /* Add your CSS styles here */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #36454F;
+            color: #fff;
+            padding: 20px;
+        }
+
+        header h1 {
+            font-weight: bold;
+            font-size: 24px;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+        }
+
+        button {
+            background-color: #4C8BF5;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        pre {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            margin-top: 20px;
+            white-space: pre-wrap;
+        }
+
+        footer {
+            background-color: #708090;
+            color: hsl(0, 0%, 1%);
+            padding: 50px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>ASCII Converter</h1>
+    </header>
+
+    <div class="container">
+        <form>
+            <label for="textInput">Input data</label>
+            <input type="text" id="textInput" placeholder="Enter text to convert">
+            <button type="button" onclick="convertToASCII()">Convert</button>
+        </form>
+
+        <p>Output:</p>
+        <pre id="asciiOutput"></pre>
+    </div>
+
+    <footer>
+        <p>About ASCII Converter</p>
+        <p>
+            Convert text into ASCII number format. For example, A is 065. Text in a computer is stored as numbers called ASCII numbers with each letter having its own number. Input text to convert to these ASCII numbers. ASCII is short for American Standard Code for Information Interchange. With applications in computers and other devices that use text, ASCII codes represent text. Based on the English alphabet, ASCII is a character-encoding scheme. ASCII was originally developed from telegraphic codes.
+        </p>
+    </footer>
+	&copy; 2023 Samuel Gonzalez
+	</footer>
+    <script>
+    const textInput = document.getElementById("textInput");
+    const asciiOutput = document.getElementById("asciiOutput");
+
+    textInput.addEventListener("input", function () {
+        const inputValue = textInput.value;
+        let asciiOutputValue = "";
+
+        for (let i = 0; i < inputValue.length; i++) {
+            const charCode = inputValue.charCodeAt(i);
+            asciiOutputValue += charCode + " ";
+        }
+//HTML5.net
+        asciiOutput.textContent = asciiOutputValue;
+    });
+</script>
+</body>
+</html>
+
+

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Unicode Converter</title>
+    <style>
+        /* Add your CSS styles here */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #36454F;
+            color: #fff;
+            padding: 20px;
+        }
+
+        header h1 {
+            font-weight: bold;
+            font-size: 24px;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        input[type="text"], textarea {
+            padding: 10px;
+            width: 100%;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+
+        input[type="text"][readonly] {
+            padding: 10px;
+            width: 100%;
+            background-color: #eee;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            background-color: #4C8BF5;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        h2 {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Unicode Converter and URL Encoder/Decoder</h1>
+    </header>
+
+    <div class="container">
+        <div>
+            <h2>Unicode Conversion</h2>
+            <textarea id="inputText" rows="5" cols="50" oninput="convertText()" placeholder="Enter text here"></textarea>
+            <br>
+            <label>UTF-16:</label>
+            <input type="text" id="utf16" readonly>
+            <br>
+            <label>UTF-8:</label>
+            <input type="text" id="utf8" readonly>
+            <br>
+            <label>UTF-32:</label>
+            <input type="text" id="utf32" readonly>
+        </div>
+
+        <div>
+            <h2>URL Encoding/Decoding</h2>
+            <textarea id="urlText" rows="5" cols="50" oninput="encodeDecodeURL()" placeholder="Enter URL or text to encode/decode"></textarea>
+            <br>
+            <label>Encoded URL:</label>
+            <input type="text" id="encodedURL" readonly>
+            <br>
+            <label>Decoded URL:</label>
+            <input type="text" id="decodedURL" readonly>
+        </div>
+    </div>
+	<footer>
+    <p>About Unicode Converter and URL Encoder/Decoder</p>
+    <p>
+        Convert text into Unicode representations (UTF-16, UTF-8, UTF-32) and encode or decode URLs. This tool helps you work with text and URLs in various encoding formats. Unicode is a character encoding standard that encompasses most of the world's writing systems. URL encoding is essential for handling special characters in web addresses.
+    </p>
+    &copy; 2023 Samuel Gonzalez
+</footer>
+</body>
+<script>
+    function convertText() {
+        // Get the input text from the user
+        const inputText = document.getElementById("inputText").value;
+
+        // Convert to UTF-16, UTF-8, and UTF-32 representations
+        const utf16 = Array.from(inputText).map(char => "\\u" + char.charCodeAt(0).toString(16)).join("");
+        const utf8 = unescape(encodeURIComponent(inputText)).split('').map(char => '%' + ('00' + char.charCodeAt(0).toString(16)).slice(-2)).join("");
+        const utf32 = Array.from(inputText).map(char => 'U+' + ('0000' + char.charCodeAt(0).toString(16)).slice(-4)).join(" ");
+
+        // Display the results in the respective text boxes
+        document.getElementById("utf16").value = utf16;
+        document.getElementById("utf8").value = utf8;
+        document.getElementById("utf32").value = utf32;
+    }
+
+    function encodeDecodeURL() {
+        const urlText = document.getElementById("urlText").value;
+
+        // Encode URL
+        const encodedURL = encodeURIComponent(urlText);
+
+        // Decode URL
+        const decodedURL = decodeURIComponent(urlText);
+
+        // Display the results
+        document.getElementById("encodedURL").value = encodedURL;
+        document.getElementById("decodedURL").value = decodedURL;
+    }
+</script>
+</html>
+
